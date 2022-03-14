@@ -1,7 +1,6 @@
 package donglee99.instagram.web.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,8 +11,9 @@ import javax.persistence.Id;
 import java.util.Collection;
 
 @Getter
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
+@Builder
 public class User implements UserDetails {
 
     @Id
@@ -27,6 +27,18 @@ public class User implements UserDetails {
     private String title;
     private String website;
     private String profileImgUrl;
+
+    @Builder
+    public User(long id, String email, String password, String phoneNumber, String name, String title, String website, String profileImgUrl) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.title = title;
+        this.website = website;
+        this.profileImgUrl = profileImgUrl;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -62,4 +74,14 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public void update(String password, String phoneNumber, String name, String title, String website, String profileImgUrl) {
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.title = title;
+        this.website = website;
+        this.profileImgUrl = profileImgUrl;
+    }
+
 }
