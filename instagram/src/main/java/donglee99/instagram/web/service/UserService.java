@@ -1,6 +1,7 @@
 package donglee99.instagram.web.service;
 
 import donglee99.instagram.web.domain.User;
+import donglee99.instagram.web.dto.UserDto;
 import donglee99.instagram.web.dto.UserLoginDto;
 import donglee99.instagram.web.dto.UserUpdateDto;
 import donglee99.instagram.web.repository.UserRepository;
@@ -43,5 +44,11 @@ public class UserService implements UserDetailsService {
 
         if (user == null) return null;
         return user;
+    }
+
+    public UserDto getUserDtoByEmail(String name) {
+        User byEmail = userRepository.findByEmail(name);
+        UserDto userDto = new UserDto(byEmail);
+        return userDto;
     }
 }
