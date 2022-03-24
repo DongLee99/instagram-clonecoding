@@ -99,4 +99,8 @@ public class UserService implements UserDetailsService {
         UserDto userDto = new UserDto(byEmail);
         return userDto;
     }
+
+    public long getUserIdByEmail(String name) {
+        return 0;
+    }
 }

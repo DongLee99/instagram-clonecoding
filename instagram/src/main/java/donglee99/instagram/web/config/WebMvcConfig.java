@@ -21,5 +21,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .setCachePeriod(60*10*6)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
+
+        registry.addResourceHandler("/upload/**")
+                .addResourceLocations("file:///" + profileUploadFolder)
+                .resourceChain(true)
+                .addResolver(new PathResourceResolver());
     }
 }

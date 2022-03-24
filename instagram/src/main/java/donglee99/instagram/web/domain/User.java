@@ -1,14 +1,14 @@
 package donglee99.instagram.web.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Entity
@@ -28,6 +28,10 @@ public class User implements UserDetails {
     private String title;
     private String website;
     private String profileImgUrl;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"user"})
+    private List<Post> postList;
 
     @Builder
     public User(long id, String email, String password, String phoneNumber, String name, String title, String website, String profileImgUrl) {
